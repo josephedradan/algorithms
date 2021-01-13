@@ -72,7 +72,6 @@ Explanation:
             Now rearrange the matrix to form: A^-1 . b = Z
             Now solve for Z which will give you the values of the coefficients.
 
-
 Reference:
     1st, 2nd and 3rd differences and Polynomials
         https://www.youtube.com/watch?v=PhcQvPITG3A
@@ -355,7 +354,7 @@ if __name__ == '__main__':
     list_sequence = [4, 14, 40, 88, 164]
 
     # This should be the length of the list as a list
-    list_sequence_corresponding_x_values = list(range(len(list_sequence)))
+    # list_sequence_corresponding_x_values = list(range(len(list_sequence)))
 
     # Use this list to test any other values
     list_sequence_corresponding_x_values = [-4, -2, 0, 2, 4]
