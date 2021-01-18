@@ -27,11 +27,12 @@ Reference:
 
 from typing import Set, FrozenSet, List
 
-from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
-from josephs_resources.decorators.v2.timer import timer
+
+# from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
+# from josephs_resources.decorators.v2.timer import timer
 
 
-@timer
+# @timer
 def get_combination(list_given: list, choose_number: int) -> List[set]:
     """
     Given a list, find the combinations
@@ -57,7 +58,7 @@ def get_combination(list_given: list, choose_number: int) -> List[set]:
     return list_sets
 
 
-@callable_called_count
+# @callable_called_count
 def _get_combination_helper(list_temp_shared_generic_solution: list,
                             list_remaining_items: list,
                             set_frozenset_shared_solutions: set,
@@ -130,25 +131,27 @@ def _get_combination_helper(list_temp_shared_generic_solution: list,
         list_temp_shared_generic_solution.pop()
 
 
-if __name__ == '__main__':
+def test_example():
     """
     Remember that Call Count HAS NOT BEEN RESET AFTER EACH RUN.
     NOTICES THIS ON THE LAST Call Count
         Call Count: 325
-        
+
         Look at this:
             Approximate iterations if choose_number == len(list_remaining_items) (Permutation formula):
             Summation from r = 1 to n of (n!)/((n-r)!) where n = 5
             == 325
-        
+
         IT MATCHES... except for the empty set...
-        
+
     """
 
     solution = get_combination([1, 2, 3, 4, 5], 1)
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
+    print()
+
     """
     Callable: get_combination                         
     Callable ran in 0.0 Sec
@@ -165,7 +168,9 @@ if __name__ == '__main__':
     solution = get_combination([1, 2, 3, 4, 5], 2)
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
+    print()
+
     """
     Callable: get_combination                         
     Callable ran in 0.0 Sec
@@ -187,7 +192,9 @@ if __name__ == '__main__':
     solution = get_combination([1, 2, 3, 4, 5], 3)
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
+    print()
+
     """
     Callable: get_combination                         
     Callable ran in 0.0 Sec
@@ -209,7 +216,8 @@ if __name__ == '__main__':
     solution = get_combination([1, 2, 3, 4, 5], 4)
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
+    print()
     """
     Callable: get_combination                         
     Callable ran in 0.001001596450805664 Sec
@@ -221,12 +229,13 @@ if __name__ == '__main__':
     5
     Callable: _get_combination_helper
     Callable Call Count: 119
-    
+
     """
     solution = get_combination([1, 2, 3, 4, 5], 5)
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count
+    print()
     """
     Callable: get_combination                         
     Callable ran in 0.0 Sec
@@ -235,3 +244,7 @@ if __name__ == '__main__':
     Callable: _get_combination_helper
     Callable Call Count: 325
     """
+
+
+if __name__ == '__main__':
+    test_example()

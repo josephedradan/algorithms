@@ -31,7 +31,7 @@ Reference:
 """
 from pprint import pprint
 
-from josephs_resources.decorators.v1.callgraph_simple import callgraph, create_callgraph
+# from josephs_resources.decorators.v1.callgraph_simple import callgraph, create_callgraph
 from typing import Set, Dict
 import sys
 
@@ -40,7 +40,7 @@ def _dict_printer(dict_given: dict):
     [print("{} : {}".format(key, value)) for key, value in dict_given.items()]
 
 
-def _algorithem_x_printer(dict_number_letters, dict_letter_numbers, set_given, list_solution):
+def _algorithm_x_printer(dict_number_letters, dict_letter_numbers, set_given, list_solution):
     print("Collection Y")
     _dict_printer(dict_number_letters)
     print()
@@ -55,7 +55,7 @@ def _algorithem_x_printer(dict_number_letters, dict_letter_numbers, set_given, l
     print("-" * 100)
 
 
-@callgraph
+# @callgraph
 def algorithm_x_recursive(dict_number_letters: Dict[int, Set[str]], set_given: set, list_solution: list):
     """
     For given set X and collection of subsets Y, this algorithm finds subcollection Y* that are the partitions of X
@@ -72,7 +72,7 @@ def algorithm_x_recursive(dict_number_letters: Dict[int, Set[str]], set_given: s
     dict_letter_numbers = transform_dict(dict_number_letters)  # type: Dict[str, Set[int]]
 
     # Algorithm X printer
-    _algorithem_x_printer(dict_number_letters, dict_letter_numbers, set_given, list_solution)
+    _algorithm_x_printer(dict_number_letters, dict_letter_numbers, set_given, list_solution)
 
     # Smallest number of elements per column of set_given
     smallest_number_of_elements_per_set_given = smallest_amount_of_ones(dict_number_letters, set_given)
@@ -140,7 +140,7 @@ def algorithm_x_recursive(dict_number_letters: Dict[int, Set[str]], set_given: s
     return None  # Explicit Return rather than Implicit if all else fails
 
 
-@callgraph
+# @callgraph
 def smallest_amount_of_ones(dict_number_letters: Dict[int, Set[str]], set_given: Set[int]) -> int:
     """
     Given a dict of numbers Key and sets Value with
@@ -172,7 +172,7 @@ def smallest_amount_of_ones(dict_number_letters: Dict[int, Set[str]], set_given:
     return smallest
 
 
-@callgraph
+# @callgraph
 def transform_dict(dict_given: Dict) -> Dict:
     """
     Transform the dict from Key Value to Value Key
@@ -200,10 +200,7 @@ def transform_dict(dict_given: Dict) -> Dict:
     return dict_new
 
 
-# Random thingy??
-# Z = transform_dict(SET_Y)
-
-if __name__ == '__main__':
+def test_example():
     # print(smallest_amount_of_ones(Y))
     # print(transform_collection(transform_collection(Y)))
 
@@ -224,3 +221,7 @@ if __name__ == '__main__':
 
     # Export the functions calls as a SVG the call graph
     # create_callgraph()
+
+
+if __name__ == '__main__':
+    test_example()

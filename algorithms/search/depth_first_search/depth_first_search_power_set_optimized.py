@@ -25,11 +25,12 @@ Reference:
 """
 from typing import FrozenSet, List, Dict
 
-from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
-from josephs_resources.decorators.v2.timer import timer
+
+# from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
+# from josephs_resources.decorators.v2.timer import timer
 
 
-@timer
+# @timer
 def get_power_set(list_given: list) -> List[set]:
     """
     Given a list, find the power set of it which is basically all the combinations for all
@@ -60,7 +61,7 @@ def get_power_set(list_given: list) -> List[set]:
     return list_sets
 
 
-@callable_called_count
+# @callable_called_count
 def _get_power_set_helper(list_temp_shared_generic_solution: list,
                           list_remaining_items: list,
                           set_frozenset_shared_solutions: set) -> None:
@@ -121,11 +122,11 @@ def _get_power_set_helper(list_temp_shared_generic_solution: list,
         list_temp_shared_generic_solution.pop()
 
 
-if __name__ == '__main__':
+def test_example():
     solution = get_power_set([1, 2, 3, 4, 5])
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
     """
     Callable: get_power_set                           
     Callable ran in 0.001001119613647461 Sec
@@ -165,3 +166,7 @@ if __name__ == '__main__':
     Callable: _get_power_set_helper
     Callable Call Count: 31
     """
+
+
+if __name__ == '__main__':
+    test_example()

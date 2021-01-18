@@ -349,15 +349,15 @@ def sequence_equation_solver(list_sequence: List[int], list_x_values: List[int] 
     return equation_polynomial, matrix_column_coefficients, degree, list_x_values, list_sequence
 
 
-if __name__ == '__main__':
+def test_example():
     # Example sequence
     list_sequence = [4, 14, 40, 88, 164]
 
     # This should be the length of the list as a list
-    # list_sequence_corresponding_x_values = list(range(len(list_sequence)))
+    list_sequence_corresponding_x_values = list(range(len(list_sequence)))
 
     # Use this list to test any other values
-    list_sequence_corresponding_x_values = [-4, -2, 0, 2, 4]
+    # list_sequence_corresponding_x_values = [-4, -2, 0, 2, 4]
 
     # Result of the solver
     result = sequence_equation_solver(list_sequence, list_sequence_corresponding_x_values)
@@ -366,3 +366,7 @@ if __name__ == '__main__':
 
     # Check if the solver is correct...
     check_if_solver_is_correct(*result)
+
+
+if __name__ == '__main__':
+    test_example()

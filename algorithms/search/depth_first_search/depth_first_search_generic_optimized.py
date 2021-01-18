@@ -25,11 +25,12 @@ Reference:
 """
 from typing import List
 
-from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
-from josephs_resources.decorators.v2.timer import timer
+
+# from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
+# from josephs_resources.decorators.v2.timer import timer
 
 
-@timer
+# @timer
 def get_list_dfs_traversal(list_given: list) -> List[list]:
     """
     Given a list, finds all combinations and their permutations
@@ -50,7 +51,7 @@ def get_list_dfs_traversal(list_given: list) -> List[list]:
     return list_list_shared_solutions
 
 
-@callable_called_count
+# @callable_called_count
 def _get_list_dfs_traversal_helper(list_temp_shared_generic_solution: list,
                                    list_remaining_items: list,
                                    list_list_shared_solutions: list) -> None:
@@ -96,11 +97,11 @@ def _get_list_dfs_traversal_helper(list_temp_shared_generic_solution: list,
         list_temp_shared_generic_solution.pop()
 
 
-if __name__ == '__main__':
+def test_example():
     solution = get_list_dfs_traversal([1, 2, 3, 4, 5])
     for i in solution: print(i)
     print(len(solution))
-    print_callable_called_count()
+    # print_callable_called_count()
     """
     Callable: get_list_dfs_traversal                  
     Callable ran in 0.0 Sec
@@ -433,3 +434,7 @@ if __name__ == '__main__':
     Callable: _get_list_dfs_traversal_helper
     Callable Call Count: 206
     """
+
+
+if __name__ == '__main__':
+    test_example()

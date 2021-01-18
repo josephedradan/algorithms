@@ -6,7 +6,8 @@ Date created: 10/23/19
 
 Purpose:
     Test Cooperative Game Theory with Shapley value
-    Shapely Value - A method of dividing up gains or costs among players according to the value of their individual contributions
+    Shapely Value - A method of dividing up gains or costs among players according to the value of their individual
+    contributions
 
 Details:
 
@@ -409,72 +410,70 @@ def get_dict_contributions_formatter_key_to_tuple(dict_contributions_given: dict
     return dict_result
 
 
+def test_example_1():
+    print("Vincent Knight")
+    print('"Cooperative Games and the Shapley value" Example')
+    dict_contributions = {("A"): 80,
+                          ("B"): 56,
+                          ("C"): 70,
+                          ("A", "B"): 80,
+                          ("A", "C"): 85,
+                          ("B", "C"): 72,
+                          ("A", "B", "C"): 90
+                          }
+
+    # dict_contributions = get_dict_contributions_formatter_value_to_set(dict_contributions)  # DON"T TOUCH
+    # dict_contributions = get_dict_contributions_formatter_key_to_tuple(dict_contributions)  # DON"T TOUCH
+
+    shapley_value_object = ShapleyValue(dict_contributions)
+    shapley_value_object.run()
+    shapley_value_object.print_shapley_value()
+
+
+def test_example_2():
+    print("SciShow")
+    print('"Game Theory: The Science of Decision-Making" Example')
+
+    dict_contributions_2 = {("A"): 10,
+                            ("B"): 20,
+                            ("A", "B"): 40,
+                            }
+
+    shapley_value_object = ShapleyValue(dict_contributions_2)
+    shapley_value_object.run()
+    shapley_value_object.print_shapley_value()
+
+
+def test_example_3():
+    print("Custom Example")
+    dict_contributions = {("A"): 80,
+                          ("B"): 56,
+                          ("C"): 70,
+                          ("D"): 64,
+                          ("A", "B"): 80,
+                          ("A", "C"): 85,
+                          ("A", "D"): 78,
+                          ("B", "C"): 72,
+                          ("B", "D"): 89,
+                          ("C", "D"): 83,
+                          ("A", "B", "C"): 90,
+                          ("A", "B", "D"): 91,
+                          ("A", "C", "D"): 89,
+                          ("B", "C", "D"): 93,
+                          ("A", "B", "C", "D"): 100,
+                          }
+
+    shapley_value_object = ShapleyValue(dict_contributions)
+    shapley_value_object.run()
+    shapley_value_object.print_shapley_value()
+
+
 if __name__ == '__main__':
-    def test_1():
-        print("Vincent Knight")
-        print('"Cooperative Games and the Shapley value" Example')
-        dict_contributions = {("A"): 80,
-                              ("B"): 56,
-                              ("C"): 70,
-                              ("A", "B"): 80,
-                              ("A", "C"): 85,
-                              ("B", "C"): 72,
-                              ("A", "B", "C"): 90
-                              }
-
-        # dict_contributions = get_dict_contributions_formatter_value_to_set(dict_contributions)  # DON"T TOUCH
-        # dict_contributions = get_dict_contributions_formatter_key_to_tuple(dict_contributions)  # DON"T TOUCH
-
-        shapley_value_object = ShapleyValue(dict_contributions)
-        shapley_value_object.run()
-        shapley_value_object.print_shapley_value()
-
-
-    test_1()
+    test_example_1()
     print()
 
-
-    def test_2():
-        print("SciShow")
-        print('"Game Theory: The Science of Decision-Making" Example')
-
-        dict_contributions_2 = {("A"): 10,
-                                ("B"): 20,
-                                ("A", "B"): 40,
-                                }
-
-        shapley_value_object = ShapleyValue(dict_contributions_2)
-        shapley_value_object.run()
-        shapley_value_object.print_shapley_value()
-
-
+    test_example_2()
     print()
-    test_2()
 
-
-    def test_3():
-        print("Custom Example")
-        dict_contributions = {("A"): 80,
-                              ("B"): 56,
-                              ("C"): 70,
-                              ("D"): 64,
-                              ("A", "B"): 80,
-                              ("A", "C"): 85,
-                              ("A", "D"): 78,
-                              ("B", "C"): 72,
-                              ("B", "D"): 89,
-                              ("C", "D"): 83,
-                              ("A", "B", "C"): 90,
-                              ("A", "B", "D"): 91,
-                              ("A", "C", "D"): 89,
-                              ("B", "C", "D"): 93,
-                              ("A", "B", "C", "D"): 100,
-                              }
-
-        shapley_value_object = ShapleyValue(dict_contributions)
-        shapley_value_object.run()
-        shapley_value_object.print_shapley_value()
-
-
+    test_example_3()
     print()
-    test_3()
