@@ -292,8 +292,8 @@ def simplify_list_item_mathematical(list_item_mathematical: list) -> Real:
 def dfs_permutations_expression_arithmetic_priority(list_item_mathematical, list_arithmetic_expression=None):
     """
     Given a list of mathematical items, find all permutations of the order in which each arithmetic expression,
-    a combination of 2 operands and 1 operator, will be evaluated first. Each arithmetic expression created is
-    created via dfs method.
+    a combination of 2 operands and 1 operator, will be evaluated first. Each arithmetic expression created via dfs
+    method.
 
     Notes:
         list_item_mathematical MUST NOT BE A GENERATOR

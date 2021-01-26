@@ -26,8 +26,8 @@ Reference:
 from typing import FrozenSet, List, Dict
 
 
-# from josephs_resources.decorators.v1.callable_called_count import print_callable_called_count, callable_called_count
-# from josephs_resources.decorators.v2.timer import timer
+# from josephs_resources.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
+# from josephs_resources.decorators.timer import timer
 
 
 # @timer
