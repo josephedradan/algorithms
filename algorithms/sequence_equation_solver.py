@@ -69,7 +69,7 @@ Explanation:
                  [27  9  3  1]]        [d]]        [88]]
 
             Let represent the matrix in form: A . Z = B
-            Now rearrange the matrix to form: A^-1 . b = Z
+            Now rearrange the matrix to form: A^-1 . B = Z
             Now solve for Z which will give you the values of the coefficients.
 
 Reference:
