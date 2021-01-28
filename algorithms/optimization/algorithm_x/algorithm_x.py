@@ -31,7 +31,7 @@ Reference:
 """
 from pprint import pprint
 
-# from josephs_resources.decorators._old.callgraph_simple import callgraph, create_callgraph
+# from josephs_resources.decorators.callgraph_simple import callgraph, create_callgraph
 from typing import Set, Dict
 import sys
 
@@ -55,7 +55,7 @@ def _algorithm_x_printer(dict_number_letters, dict_letter_numbers, set_given, li
     print("-" * 100)
 
 
-# @callgraph
+@callgraph
 def algorithm_x_recursive(dict_number_letters: Dict[int, Set[str]], set_given: set, list_solution: list):
     """
     For given set X and collection of subsets Y, this algorithm finds subcollection Y* that are the partitions of X
