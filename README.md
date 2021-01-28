@@ -1,6 +1,6 @@
 # Algorithms
 ### Description
-This repository has algorithms that I wrote to solve specific problems or to learn understand.  
+This repository has algorithms that I wrote to solve specific problems or to learn and understand.  
 
 ### Notes:
 - This repo includes known algorithms and very specific algorithms to solve specific problems.
