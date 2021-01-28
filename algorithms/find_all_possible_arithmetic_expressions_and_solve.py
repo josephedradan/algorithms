@@ -59,6 +59,9 @@ Explanation:
         return dict_result_arithmetic_expression
 
 Reference:
+    The simple puzzle that most people can't solve
+        https://www.youtube.com/watch?v=Jnf18uqZRyw
+
     Python number base class OR how to determine a value is a number
         https://stackoverflow.com/questions/44756406/python-number-base-class-or-how-to-determine-a-value-is-a-number
 
@@ -542,6 +545,11 @@ def solve_problem(target=24):
         for expression in set_solution:
             print("\t{} = {}".format(expression, expression.get_result()))
 
+    for key, value in dict_results.items():
+        print(key)
+        for expression in value:
+            print("\t{}".format(expression))
+        print()
 
 def test_example():
     """
