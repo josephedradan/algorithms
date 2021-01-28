@@ -13,7 +13,7 @@ This repository has algorithms that I wrote to solve specific problems or to lea
 ##### Algorithm: [*shapley_value.py*](https://github.com/josephedradan/algorithms/tree/master/algorithms/optimization/algorithm_x)
 ![algorithm_x.png](../master/images/algorithm_x.png)
 ##### Function callgraph:
-<img src="../master/algorithms/optimization/algorithm_x/algorithm_x_Output.gv.svg" height="100" alt="algorithm_x_Output.gv.svg">
+<img src="https://raw.githubusercontent.com/josephedradan/algorithms/befcc2c2032033469e54103e854753aa13a267c4/algorithms/optimization/algorithm_x/algorithm_x_Output.gv.svg" height="100" alt="algorithm_x_Output.gv.svg">
 - A crude implementation of Algorithm X using the wiki as a reference.
 
 ### Examples of specific algorithms that solve problems
