@@ -23,7 +23,7 @@ This repository has algorithms that I wrote to solve specific problems or to lea
 - An algorithm that finds how much a individuals contributes to a cooperative activity.
 
 #### Video: [*The simple puzzle that most people can't solve*](https://www.youtube.com/watch?v=Jnf18uqZRyw)
-##### Algorithm: [*find_all_possible_arithmetic_expressions_and_solve.py*](https://github.com/josephedradan/algorithms/blob/master/algorithms/find_all_possible_arithmetic_expressions_and_solve.py)
+##### Algorithm: [*find_all_possible_arithmetic_expressions_and_solve.py*](https://github.com/josephedradan/algorithms/blob/master/algorithms/mathematics/find_all_possible_arithmetic_expressions_and_solve.py)
 ![find_all_possible_arithmetic_expressions_and_solve.png](../master/images/find_all_possible_arithmetic_expressions_and_solve.png)
 - Brute force all possible permutations of operands, operators, and the order of operations to create an expression that equals the target number 24.
 
