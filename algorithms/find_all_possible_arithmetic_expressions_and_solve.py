@@ -545,6 +545,8 @@ def solve_problem(target=24):
         for expression in set_solution:
             print("\t{} = {}".format(expression, expression.get_result()))
 
+    print("\n" + 100 * "-" + "\n")
+    print("All Permutations of Operands, Operators, and Order of Operations:")
     for key, value in dict_results.items():
         print(key)
         for expression in value:
