@@ -20,7 +20,7 @@ This repository has algorithms that I wrote to solve specific problems or to lea
 #### Video: [*Cooperative Games and the Shapley value*](https://youtu.be/w9O0fkfMkx0)
 ##### Algorithm: [*shapley_value.py*](https://github.com/josephedradan/algorithms/blob/master/algorithms/game_theory/shapley_value.py)
 ![shapley_value.png](../master/images/shapley_value.png)
-- An algorithm that finds how much a individuals contributes to a cooperative activity.
+- An algorithm that finds how much individuals contributes to a cooperative activity.
 
 #### Video: [*The simple puzzle that most people can't solve*](https://www.youtube.com/watch?v=Jnf18uqZRyw)
 ##### Algorithm: [*find_all_possible_arithmetic_expressions_and_solve.py*](https://github.com/josephedradan/algorithms/blob/master/algorithms/mathematics/find_all_possible_arithmetic_expressions_and_solve.py)
