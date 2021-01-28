@@ -10,7 +10,7 @@ This repository has algorithms that I wrote to solve specific problems or to lea
 ### Examples of algorithms
 
 #### Wiki: [*Knuth's Algorithm X*](https://en.wikipedia.org/wiki/Knuth%27s_Algorithm_X)
-##### Algorithm: [*shapley_value.py*](https://github.com/josephedradan/algorithms/tree/master/algorithms/optimization/algorithm_x)
+##### Algorithm: [*algorithm_x.py*](https://github.com/josephedradan/algorithms/blob/master/algorithms/optimization/algorithm_x/algorithm_x.py)
 ![algorithm_x.png](../master/images/algorithm_x.png)
 ##### Function callgraph:
 <img src="https://raw.githubusercontent.com/josephedradan/algorithms/befcc2c2032033469e54103e854753aa13a267c4/algorithms/optimization/algorithm_x/algorithm_x_Output.gv.svg" height="100" alt="algorithm_x_Output.gv.svg">
