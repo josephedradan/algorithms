@@ -42,7 +42,7 @@ Explanation:
         list_list_item_mathematical =
             *Interweave Every list_of_permutations_numbers with Every list_of_permutations_operators
 
-        # Create a dict with default value as a set
+        # Create a dict with default value as a set (set to prevent repeating arithmetic expressions from the dfs)
         dict_result_arithmetic_expression = defaultdict(set)
 
         For every list_item_mathematical in list_list_item_mathematical:
@@ -73,6 +73,7 @@ Reference:
 
 from __future__ import annotations
 
+import traceback
 from collections import defaultdict
 from itertools import permutations, combinations_with_replacement, chain
 from numbers import Real
@@ -136,12 +137,12 @@ class ArithmeticExpression:
         if isinstance(self.operand_lhs, ArithmeticExpression):
             lhs: Union[Real, ArithmeticExpression] = self.operand_lhs.get_result()
         else:
-            lhs = self.operand_lhs
+            lhs: Real = self.operand_lhs
 
         if isinstance(self.operand_rhs, ArithmeticExpression):
             rhs: Union[Real, ArithmeticExpression] = self.operand_rhs.get_result()
         else:
-            rhs = self.operand_rhs
+            rhs: Real = self.operand_rhs
 
         return simplify_expression(lhs, rhs, self.operator)
 
@@ -194,7 +195,6 @@ def get_list_list_item_mathematical_permutate_operators(list_permutation_operand
 
     Example:
         [1, 2, 3, 4]
-
         [+, -, *]
         [+, *, -]
         [-, +, *]
@@ -202,12 +202,25 @@ def get_list_list_item_mathematical_permutate_operators(list_permutation_operand
         [*, +, -]
         [*, -, +]
 
+        [1, 3, 2, 4]
+        [+, -, *]
+        [+, *, -]
+        ...
+
+        etc...
+
     Result:
         [1, +, 2, -, 3, *, 4]
         [1, +, 2, *, 3, -, 4]
         ...
         [1, *, 2, -, 3, +, 4]
 
+        [1, +, 3, -, 2, *, 4]
+        [1, +, 3, *, 2, -, 4]
+        ...
+        [1, *, 3, -, 2, +, 4]
+
+        etc...
 
     :param list_permutation_operands: list containing a list of operands
     :param list_permutation_operators: list containing a list of operators
@@ -240,7 +253,6 @@ def get_list_list_item_mathematical_permutate_operators(list_permutation_operand
 
                     # Add a copy of list_item_mathematical into list_list_item_mathematical
                     list_list_item_mathematical.append(list_item_mathematical.copy())
-
                     break
 
                 # Add operator to list_item_mathematical
@@ -292,10 +304,11 @@ def simplify_list_item_mathematical(list_item_mathematical: list) -> Real:
     return value
 
 
-def dfs_permutations_expression_arithmetic_priority(list_item_mathematical, list_arithmetic_expression=None):
+def dfs_permutations_expression_arithmetic_priority(list_item_mathematical: list,
+                                                    list_arithmetic_expression: list = None):
     """
     Given a list of mathematical items, find all permutations of the order in which each arithmetic expression,
-    a combination of 2 operands and 1 operator, will be evaluated first. Each arithmetic expression created via dfs
+    a combination of 2 operands and 1 operator, will be evaluated first. Each arithmetic expression is created via dfs
     method.
 
     Notes:
@@ -384,9 +397,7 @@ def dfs_permutations_expression_arithmetic_priority(list_item_mathematical, list
 
 def simplify_expression(operand_lhs: Real, operand_rhs: Real, operator: str) -> Real:
     """
-    Given lhs operand, rhs operand, and operator, simplify the expression
-
-    Don't use the dict way because it has to check the operands immediately regardless of key being called or not
+    Given lhs operand, rhs operand, and operator, simplify the expression or solve
 
     WARNING:
         Don't use the dict way because it has to check the operands immediately regardless of key being called or not
@@ -437,6 +448,7 @@ def simplify_expression(operand_lhs: Real, operand_rhs: Real, operator: str) -> 
 
     except Exception as e:
         print(e)
+        print(traceback.print_exc())
 
     # Return the result
     return result
@@ -552,6 +564,7 @@ def solve_problem(target=24):
         for expression in value:
             print("\t{}".format(expression))
         print()
+
 
 def test_example():
     """

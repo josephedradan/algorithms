@@ -43,24 +43,36 @@ Explanation:
             Assuming that the x values list corresponds to the length of the sequence:
                 [0, 1, 2, 3, 4]
 
+                from
+
+                [4, 14, 40, 88, 164]
+
             Now solve for the coefficients mathematically...
 
         Solve for the coefficients using a matrix instead:
             Recall the degree is 3 so the amount of rows in the matrix should be 3 + 1 == 4 because of
             coefficients a, b, c, d
 
+            So
+
+            [4, 14, 40, 88]
+
+            based on
+
+            [0, 1, 2, 3]
+
             Recall the equation:
                 (a)*(x)^3 + (b)*(x)^2 + (c)*(x)^1 + (d)*(x)^0 == y
 
             Pre matrix:
                 x = 0
-                    a(0)^3 + b(0)^2 + c(0)^1 + d(0)^0 == 4
+                    a*(0)^3 + b*(0)^2 + c*(0)^1 + d*(0)^0 == 4
                 x = 1
-                    a(0)^3 + b(0)^2 + c(0)^1 + d(0)^0 == 14
+                    a*(1)^3 + b*(1)^2 + c*(1)^1 + d*(1)^0 == 14
                 x = 2
-                    a(0)^3 + b(0)^2 + c(0)^1 + d(0)^0 == 40
+                    a*(2)^3 + b*(2)^2 + c*(2)^1 + d*(2)^0 == 40
                 x = 3
-                    a(0)^3 + b(0)^2 + c(0)^1 + d(0)^0 == 88
+                    a*(3)^3 + b*(3)^2 + c*(3)^1 + d*(3)^0 == 88
 
             So the matrix representation is
                 [[ 0  0  0  1]        [[a]        [[4]
