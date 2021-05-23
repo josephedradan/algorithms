@@ -101,7 +101,7 @@ def are_diagonals_safe(board: List[List[int]], y_initial: int, x_initial: int, s
                 from top to bottom
                     b_initial_top_bot = (y_initial - ((1/1) * x_initial))
 
-            Function to get row (y) based on column (x)
+            Function to get row (y) based on column (x) using (y = mx + b)
                 from bottom to top
                     func_get_row_bot_top = (-(1/1)* x) + b_initial_bot_top
 
@@ -138,11 +138,15 @@ def are_diagonals_safe(board: List[List[int]], y_initial: int, x_initial: int, s
         #                           func_get_row_top_bot(column),
         #                           column))
 
-        if 0 <= func_get_row_bot_top(column) < size and board[func_get_row_bot_top(column)][column] == 1:
-            # print()
+        value_row_y_1 = func_get_row_bot_top(column)
 
+        if 0 <= value_row_y_1 < size and board[value_row_y_1][column] == 1:
+            # print()
             return False
-        if 0 <= func_get_row_top_bot(column) < size and board[func_get_row_top_bot(column)][column] == 1:
+
+        value_row_y_2 = func_get_row_top_bot(column)
+
+        if 0 <= value_row_y_2 < size and board[value_row_y_2][column] == 1:
             # print()
 
             return False
