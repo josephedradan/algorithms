@@ -54,7 +54,7 @@ Explanation:
                 # The Key of the dict is the solved result of the arithmetic_expression and the Value is the
                 # corresponding arithmetic_expression
 
-                dict_result_arithmetic_expression[arithmetic_expression.get_result()].add(arithmetic_expression)
+                dict_result_arithmetic_expression[arithmetic_expression.get_return()].add(arithmetic_expression)
 
         return dict_result_arithmetic_expression
 
@@ -523,7 +523,7 @@ def get_dict_key_result_value_set_arithmetic_expression(
         # For every Arithmetic Expression
         for arithmetic_expression in list_arithmetic_expression:
             # print(f"Arithmetic Expression: {arithmetic_expression}")
-            # print(f"Arithmetic Expression Result: {arithmetic_expression.get_result()}")
+            # print(f"Arithmetic Expression Result: {arithmetic_expression.get_return()}")
 
             # Add result of Arithmetic Expression as a Key and the Arithmetic Expression its set
             dict_result_arithmetic_expression[arithmetic_expression.get_result()].add(arithmetic_expression)

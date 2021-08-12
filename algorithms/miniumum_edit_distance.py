@@ -23,10 +23,6 @@ Reference:
 
         Reference:
             https://www.youtube.com/watch?v=AY2DZ4a9gyk
-
-
-
-
 """
 
 import numpy as np
