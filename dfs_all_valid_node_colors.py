@@ -22,9 +22,9 @@ Reference:
 from collections import defaultdict
 from typing import Dict, Set, List, Union
 
-from pycode_recorder.code_recorder import AlgorithmRecorder
+from python_code_recorder.code_recorder import CodeRecorder
 
-algorithm_recorder = AlgorithmRecorder()
+algorithm_recorder = CodeRecorder()
 
 counter = 0
 
