@@ -14,7 +14,7 @@ Description:
 Notes:
 
 IMPORTANT NOTES:
-    HIGH MEMORY USAGE, >2gb
+    HIGH MEMORY USAGE Over 2gb
 
 Explanation:
 

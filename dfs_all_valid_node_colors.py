@@ -5,6 +5,7 @@ Github: https://github.com/josephedradan
 Date created: 4/27/2021
 
 Purpose:
+    DFS to find Adjacent node color
 
 Details:
 
@@ -17,12 +18,21 @@ IMPORTANT NOTES:
 Explanation:
 
 Reference:
+    The Four Color Map Theorem - Numberphile
+        Notes:
+            Basic idea
+        Reference:
+            https://www.youtube.com/watch?v=NgbK43jB4rQ
+
+    6.3 Graph Coloring Problem - Backtracking
+        Reference:
+            https://www.youtube.com/watch?v=052VkKhIaQ4
 
 """
 from collections import defaultdict
 from typing import Dict, Set, List, Union
 
-from python_code_recorder.code_recorder import CodeRecorder
+from python_code_analyzer.python_code_analyzer import CodeRecorder
 
 algorithm_recorder = CodeRecorder()
 
@@ -153,7 +163,7 @@ def main():
     dfs_all_valid_node_colors(dict_connections, 1, list_colors)
     print(counter)
 
-    # algorithm_recorder.scope_recorder_printer.print_call_order_event_simple()
+    # algorithm_recorder.scope_recorder_printer.print_event_call_order_debug()
 
 
 if __name__ == '__main__':
