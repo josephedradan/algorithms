@@ -27,19 +27,27 @@ from typing import Set
 from typing import Tuple
 
 from solution_1 import Grid
+from solution_1 import LIST_CYCLE_POSITION_SHIFT
 from solution_1 import Position
-from solution_1 import generator_add_cycle_position_offset
+from solution_1 import get_generator_add_cycle_position_shift_relative_to_position_relative
 from solution_1 import get_grid
 from solution_1 import print_grid
 
 
 def bfs_spiral_add_number_to_grid_inpendent_of_grid(grid: Grid,
                                                     number_of_valid_positions_on_grid: int,
-                                                    position_start: Position):
+                                                    position_start: Position,
+                                                    _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
+                                                    ):
     try:
         grid[position_start[1]][position_start[0]]
     except Exception as e:
         return
+
+    # Get a generator that gets the correct offset based on _list_cycle_position_shift when given a position_target
+    generator_add_cycle_position_shift_relative_to_position_relative = (
+        get_generator_add_cycle_position_shift_relative_to_position_relative(_list_cycle_position_shift)
+    )
 
     queue_: Queue[Position] = Queue()
     queue_.put(position_start)
@@ -61,7 +69,7 @@ def bfs_spiral_add_number_to_grid_inpendent_of_grid(grid: Grid,
         counter += 1
 
         try:
-            # Prevent negative indexing (Negative indexing will overwrite existing values)
+            # Prevent negative indexing
             if position_popped[0] < 0 or position_popped[1] < 0:
                 raise Exception
 
@@ -72,7 +80,8 @@ def bfs_spiral_add_number_to_grid_inpendent_of_grid(grid: Grid,
         except Exception as e:
             pass
 
-        for position_new in generator_add_cycle_position_offset(position_popped):
+        for position_new in generator_add_cycle_position_shift_relative_to_position_relative(position_popped,
+                                                                                             position_start):
 
             if position_new not in set_position_traveled:
                 queue_.put(position_new)
