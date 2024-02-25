@@ -11,7 +11,15 @@ Details:
 Description:
 
 Notes:
-    BFS to add numbers to a grid in clockwise spiral cycle manner.
+    BFS to add numbers to a grid in a clockwise spiral cycle manner.
+    The way in which items are added to the queue in the BFS is based on
+    the difference between the initial cell's position (where the spiral starts)
+    to the current cell's position, we'll call this the difference position.
+    The signs of the difference position's components (negative, 0, positive),
+    determines where iteration starts in the clockwise cycle.
+    Iteration over the clockwise cycle adds the surrounding elements to the BFS queue.
+    The clockwise cycle is hard coded to start from the top right.
+
     Adding to the grid DOES NOT take in account invalid grid positions
     as valid positions to place numbers.
 
@@ -23,7 +31,6 @@ Reference:
 
 """
 import sys
-from functools import wraps
 from queue import Queue
 from typing import Callable
 from typing import Generator
@@ -95,6 +102,7 @@ def generator_add_cycle_position_shift(position: Position,
             position[1] + position_shift[1]
         )
 
+
 def get_generator_add_cycle_position_shift_relative_to_position_relative(
         list_cycle_position_shift: List[Position]) -> Callable[[Position, Position], Generator[Position, None, None]]:
     """
@@ -115,7 +123,6 @@ def get_generator_add_cycle_position_shift_relative_to_position_relative(
     def _generator_add_cycle_position_shift_relative_to_position_relative(
             position: Position,
             position_relative: Position) -> Generator[Position, None, None]:
-
         position_distance = get_position_distance(position, position_relative)
 
         # Branchless sign trick to convert position_distance to position_shift where valid values are (-1, 0, 1)
@@ -225,6 +232,3 @@ def print_grid(grid: Grid) -> None:
 
 if __name__ == '__main__':
     main()
-
-
-
