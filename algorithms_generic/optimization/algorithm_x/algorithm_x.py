@@ -31,7 +31,7 @@ Reference:
 """
 from pprint import pprint
 
-# from joseph_resources.decorators.callgraph_simple import callgraph, create_callgraph
+# from joseph_library.decorators.callgraph_simple import callgraph, create_callgraph
 from typing import Set, Dict
 import sys
 

@@ -60,7 +60,10 @@ Explanation:
 
 Reference:
     The simple puzzle that most people can't solve
-        https://www.youtube.com/watch?v=Jnf18uqZRyw
+        Notes:
+            Python Programmer
+        Refernece:
+            https://www.youtube.com/watch?v=Jnf18uqZRyw
 
     Python number base class OR how to determine a value is a number
         https://stackoverflow.com/questions/44756406/python-number-base-class-or-how-to-determine-a-value-is-a-number
@@ -75,9 +78,14 @@ from __future__ import annotations
 
 import traceback
 from collections import defaultdict
-from itertools import permutations, combinations_with_replacement, chain
+
+from itertools import chain
+from itertools import combinations_with_replacement
+from itertools import permutations
 from numbers import Real
-from typing import Union, Set, Dict
+from typing import Dict
+from typing import Set
+from typing import Union
 
 
 class ArithmeticExpression:
@@ -566,17 +574,59 @@ def solve_problem(target=24):
         print()
 
 
-def test_example():
+def _test_example():
     """
     Possibly show all Arithmetic Expressions and their corresponding result
+
+    FIXME: THIS WILL HIT MAX INT
 
     :return: None
     """
     operands = [6, 4, 3, 1]
     operators = ["+", "-", "*", "/", "**", "//", "%"]
 
-    dict_results = get_dict_key_result_value_set_arithmetic_expression(operands, operators,
-                                                                       treat_list_operators_as_allowed_to_use=True)
+    dict_results = get_dict_key_result_value_set_arithmetic_expression(
+        operands,
+        operators,
+        treat_list_operators_as_allowed_to_use=True
+    )
+
+    total_expressions = 0
+
+    for key, value in dict_results.items():
+        print(key)
+        for expression in value:
+            total_expressions += 1
+            print("\t{}".format(expression))
+        print()
+
+    print(f"Total solutions: {len(dict_results)}")
+    print(f"Total expressions: {total_expressions}")
+
+
+def _test_example_2():
+    """
+    IMPORTANT NOTES:
+        THIS WILL NOT FINISH, PROBABLY MULTIPROCESS THIS + SMARTER CALCULATION TO GET TARGET VALUE FROM VIDEO
+        TODO: FIX THIS
+    Reference:
+        “That’s called a Bic drop, y’all” - Richard Ayoade’s real life tnetennba moment in the numbers round
+            Reference:
+                https://www.youtube.com/watch?v=EGUxnGPQzvU
+    :return:
+    """
+
+    target_value = 950
+
+    operands = [1, 10, 2, 3, 5, 2]
+    # operators = ["+", "-", "*", "/", "//", "%"]
+    operators = ["+", "-", "*", "/"]
+
+    dict_results = get_dict_key_result_value_set_arithmetic_expression(
+        operands,
+        operators,
+        treat_list_operators_as_allowed_to_use=True
+    )
 
     total_expressions = 0
 
@@ -592,8 +642,9 @@ def test_example():
 
 
 if __name__ == '__main__':
-    solve_problem()
+    solve_problem()  # Solution to the problem
 
     print("\n" + 100 * "-" + "\n")
 
-    test_example()
+    # _test_example()
+    # _test_example_2()

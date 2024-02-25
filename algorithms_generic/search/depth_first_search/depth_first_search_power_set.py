@@ -23,11 +23,11 @@ Time Complexity:
 Reference:
 
 """
-from typing import FrozenSet, List
+from typing import Set, FrozenSet, List
 
 
-# from joseph_resources.decorators.callable_called_count import print_callable_called_count, callable_called_count
-# from joseph_resources.decorators.timer import timer
+# from joseph_library.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
+# from joseph_library.decorators.timer import timer
 
 
 # @timer
@@ -70,9 +70,17 @@ def _get_power_set_helper(list_temp_shared_generic_solution: list,
 
     Notes: The amount of iterations should be - 1 because empty set is not involved
 
+    Total iterations (Permutation formula):
+        Less than (Due to not Recursive calling for an empty list_remaining_items)
+        Summation from r = 0 to n of (n!)/((n-r)!)
+            where   r = sample size                         == len(list_remaining_items)
+                    n = number of objects                   == len(list_remaining_items)
+                    (n!)/((n-r)!) = permutation formula
+
     Power Set iterations:
-        Summation from r = 0 to n of (n!)/(r!(n-r)!) - 1 ==
-        2^(len(list_remaining_items)) -1
+        Greater than
+        Summation from r = 0 to n of (n!)/(r!(n-r)!) ==
+        2^(len(list_remaining_items))
             where   r = sample size                         == len(list_remaining_items)
                     n = number of objects                   == len(list_remaining_items)
                     (n!)/(r!(n-r)!) = combination formula
@@ -95,21 +103,8 @@ def _get_power_set_helper(list_temp_shared_generic_solution: list,
         # Pop off the item with the index number
         list_remaining_items_new.pop(i)
 
-        # Make a frozen set of the list_temp_shared_generic_solution
-        frozenset_temp = frozenset(list_temp_shared_generic_solution)
-
-        # If frozenset_temp is not in set_frozenset_shared_solutions (This prevents duplicate runs)
-        if frozenset_temp not in set_frozenset_shared_solutions:
-
-            # Add frozenset_temp to set_frozenset_shared_solutions
-            set_frozenset_shared_solutions.add(frozenset_temp)
-
-        # If the key does exist
-        else:
-
-            # Skip the recursive call
-            list_temp_shared_generic_solution.pop()
-            continue
+        # Add a frozenset (immutable) which is hashable in a set (mutable)
+        set_frozenset_shared_solutions.add(frozenset(list_temp_shared_generic_solution))
 
         # Don't recursive call if list_remaining_items_new is empty because you loop for no reason with a range(0)
         if list_remaining_items_new:
@@ -164,7 +159,7 @@ def test_example():
     {1, 2, 3, 4, 5}
     32
     Callable: _get_power_set_helper
-    Callable Call Count: 31
+    Callable Call Count: 206
     """
 
 

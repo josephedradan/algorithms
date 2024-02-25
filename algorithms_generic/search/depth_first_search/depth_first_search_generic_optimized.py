@@ -15,7 +15,6 @@ Description:
 Notes:
 
 IMPORTANT NOTES:
-    Use itertools.permutations()
 
 Explanation:
 
@@ -26,14 +25,15 @@ Reference:
 """
 from typing import List
 
-# from joseph_resources.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
-# from joseph_resources.decorators.timer import timer
+
+# from joseph_library.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
+# from joseph_library.decorators.timer import timer
 
 
 # @timer
-def get_permutation(list_given: list) -> List[list]:
+def get_list_dfs_traversal(list_given: list) -> List[list]:
     """
-    Given a list, find all permutations
+    Given a list, finds all combinations and their permutations
 
     :param list_given: list given
     :return: list of a list of solutions
@@ -46,20 +46,20 @@ def get_permutation(list_given: list) -> List[list]:
     list_temp_shared_generic_solution = []  # type: list
 
     # Recursive DFS call
-    _get_permutation_helper(list_temp_shared_generic_solution, list_given, list_list_shared_solutions)
+    _get_list_dfs_traversal_helper(list_temp_shared_generic_solution, list_given, list_list_shared_solutions)
 
     return list_list_shared_solutions
 
 
 # @callable_called_count
-def _get_permutation_helper(list_temp_shared_generic_solution: list,
-                            list_remaining_items: list,
-                            list_list_shared_solutions: list) -> None:
+def _get_list_dfs_traversal_helper(list_temp_shared_generic_solution: list,
+                                   list_remaining_items: list,
+                                   list_list_shared_solutions: list) -> None:
     """
     Recursive DFS function to find all combinations and their permutations
 
-    Approximate iterations (Permutation formula):
-        Less than (Due to not Recursive calling for an empty list_remaining_items)
+    Total iterations (Permutation formula):
+        Less than
         Summation from r = 1 to n of (n!)/((n-r)!)
             where   r = sample size                         == len(list_remaining_items)
                     n = number of objects                   == len(list_remaining_items)
@@ -83,160 +83,356 @@ def _get_permutation_helper(list_temp_shared_generic_solution: list,
         # Pop off the item with the index number
         list_remaining_items_new.pop(i)
 
-        """
-        If list_remaining_items_new is empty then add a copy of list_temp_shared_generic_solution 
-        into list_list_shared_solutions
-        """
-        if not list_remaining_items_new:
-            # Add a copy of list_temp_shared_generic_solution to the list_list_shared_solutions
-            list_list_shared_solutions.append(list_temp_shared_generic_solution.copy())
+        # Add a copy of list_temp_shared_generic_solution to the list_list_shared_solutions
+        list_list_shared_solutions.append(list_temp_shared_generic_solution.copy())
 
         # Don't recursive call if list_remaining_items_new is empty because you loop for no reason with a range(0)
         if list_remaining_items_new:
             # Recursive call into this function
-            _get_permutation_helper(list_temp_shared_generic_solution,
-                                    list_remaining_items_new,
-                                    list_list_shared_solutions)
+            _get_list_dfs_traversal_helper(list_temp_shared_generic_solution,
+                                           list_remaining_items_new,
+                                           list_list_shared_solutions)
 
         # Pop from list_temp_permutation for a new permutation
         list_temp_shared_generic_solution.pop()
 
 
 def test_example():
-    solution = get_permutation([1, 2, 3, 4, 5])
+    solution = get_list_dfs_traversal([1, 2, 3, 4, 5])
     for i in solution: print(i)
     print(len(solution))
     # print_callable_called_count()
-
     """
-    Callable: get_permutation                         
+    Callable: get_list_dfs_traversal                  
     Callable ran in 0.0 Sec
+    [1]
+    [1, 2]
+    [1, 2, 3]
+    [1, 2, 3, 4]
     [1, 2, 3, 4, 5]
+    [1, 2, 3, 5]
     [1, 2, 3, 5, 4]
+    [1, 2, 4]
+    [1, 2, 4, 3]
     [1, 2, 4, 3, 5]
+    [1, 2, 4, 5]
     [1, 2, 4, 5, 3]
+    [1, 2, 5]
+    [1, 2, 5, 3]
     [1, 2, 5, 3, 4]
+    [1, 2, 5, 4]
     [1, 2, 5, 4, 3]
+    [1, 3]
+    [1, 3, 2]
+    [1, 3, 2, 4]
     [1, 3, 2, 4, 5]
+    [1, 3, 2, 5]
     [1, 3, 2, 5, 4]
+    [1, 3, 4]
+    [1, 3, 4, 2]
     [1, 3, 4, 2, 5]
+    [1, 3, 4, 5]
     [1, 3, 4, 5, 2]
+    [1, 3, 5]
+    [1, 3, 5, 2]
     [1, 3, 5, 2, 4]
+    [1, 3, 5, 4]
     [1, 3, 5, 4, 2]
+    [1, 4]
+    [1, 4, 2]
+    [1, 4, 2, 3]
     [1, 4, 2, 3, 5]
+    [1, 4, 2, 5]
     [1, 4, 2, 5, 3]
+    [1, 4, 3]
+    [1, 4, 3, 2]
     [1, 4, 3, 2, 5]
+    [1, 4, 3, 5]
     [1, 4, 3, 5, 2]
+    [1, 4, 5]
+    [1, 4, 5, 2]
     [1, 4, 5, 2, 3]
+    [1, 4, 5, 3]
     [1, 4, 5, 3, 2]
+    [1, 5]
+    [1, 5, 2]
+    [1, 5, 2, 3]
     [1, 5, 2, 3, 4]
+    [1, 5, 2, 4]
     [1, 5, 2, 4, 3]
+    [1, 5, 3]
+    [1, 5, 3, 2]
     [1, 5, 3, 2, 4]
+    [1, 5, 3, 4]
     [1, 5, 3, 4, 2]
+    [1, 5, 4]
+    [1, 5, 4, 2]
     [1, 5, 4, 2, 3]
+    [1, 5, 4, 3]
     [1, 5, 4, 3, 2]
+    [2]
+    [2, 1]
+    [2, 1, 3]
+    [2, 1, 3, 4]
     [2, 1, 3, 4, 5]
+    [2, 1, 3, 5]
     [2, 1, 3, 5, 4]
+    [2, 1, 4]
+    [2, 1, 4, 3]
     [2, 1, 4, 3, 5]
+    [2, 1, 4, 5]
     [2, 1, 4, 5, 3]
+    [2, 1, 5]
+    [2, 1, 5, 3]
     [2, 1, 5, 3, 4]
+    [2, 1, 5, 4]
     [2, 1, 5, 4, 3]
+    [2, 3]
+    [2, 3, 1]
+    [2, 3, 1, 4]
     [2, 3, 1, 4, 5]
+    [2, 3, 1, 5]
     [2, 3, 1, 5, 4]
+    [2, 3, 4]
+    [2, 3, 4, 1]
     [2, 3, 4, 1, 5]
+    [2, 3, 4, 5]
     [2, 3, 4, 5, 1]
+    [2, 3, 5]
+    [2, 3, 5, 1]
     [2, 3, 5, 1, 4]
+    [2, 3, 5, 4]
     [2, 3, 5, 4, 1]
+    [2, 4]
+    [2, 4, 1]
+    [2, 4, 1, 3]
     [2, 4, 1, 3, 5]
+    [2, 4, 1, 5]
     [2, 4, 1, 5, 3]
+    [2, 4, 3]
+    [2, 4, 3, 1]
     [2, 4, 3, 1, 5]
+    [2, 4, 3, 5]
     [2, 4, 3, 5, 1]
+    [2, 4, 5]
+    [2, 4, 5, 1]
     [2, 4, 5, 1, 3]
+    [2, 4, 5, 3]
     [2, 4, 5, 3, 1]
+    [2, 5]
+    [2, 5, 1]
+    [2, 5, 1, 3]
     [2, 5, 1, 3, 4]
+    [2, 5, 1, 4]
     [2, 5, 1, 4, 3]
+    [2, 5, 3]
+    [2, 5, 3, 1]
     [2, 5, 3, 1, 4]
+    [2, 5, 3, 4]
     [2, 5, 3, 4, 1]
+    [2, 5, 4]
+    [2, 5, 4, 1]
     [2, 5, 4, 1, 3]
+    [2, 5, 4, 3]
     [2, 5, 4, 3, 1]
+    [3]
+    [3, 1]
+    [3, 1, 2]
+    [3, 1, 2, 4]
     [3, 1, 2, 4, 5]
+    [3, 1, 2, 5]
     [3, 1, 2, 5, 4]
+    [3, 1, 4]
+    [3, 1, 4, 2]
     [3, 1, 4, 2, 5]
+    [3, 1, 4, 5]
     [3, 1, 4, 5, 2]
+    [3, 1, 5]
+    [3, 1, 5, 2]
     [3, 1, 5, 2, 4]
+    [3, 1, 5, 4]
     [3, 1, 5, 4, 2]
+    [3, 2]
+    [3, 2, 1]
+    [3, 2, 1, 4]
     [3, 2, 1, 4, 5]
+    [3, 2, 1, 5]
     [3, 2, 1, 5, 4]
+    [3, 2, 4]
+    [3, 2, 4, 1]
     [3, 2, 4, 1, 5]
+    [3, 2, 4, 5]
     [3, 2, 4, 5, 1]
+    [3, 2, 5]
+    [3, 2, 5, 1]
     [3, 2, 5, 1, 4]
+    [3, 2, 5, 4]
     [3, 2, 5, 4, 1]
+    [3, 4]
+    [3, 4, 1]
+    [3, 4, 1, 2]
     [3, 4, 1, 2, 5]
+    [3, 4, 1, 5]
     [3, 4, 1, 5, 2]
+    [3, 4, 2]
+    [3, 4, 2, 1]
     [3, 4, 2, 1, 5]
+    [3, 4, 2, 5]
     [3, 4, 2, 5, 1]
+    [3, 4, 5]
+    [3, 4, 5, 1]
     [3, 4, 5, 1, 2]
+    [3, 4, 5, 2]
     [3, 4, 5, 2, 1]
+    [3, 5]
+    [3, 5, 1]
+    [3, 5, 1, 2]
     [3, 5, 1, 2, 4]
+    [3, 5, 1, 4]
     [3, 5, 1, 4, 2]
+    [3, 5, 2]
+    [3, 5, 2, 1]
     [3, 5, 2, 1, 4]
+    [3, 5, 2, 4]
     [3, 5, 2, 4, 1]
+    [3, 5, 4]
+    [3, 5, 4, 1]
     [3, 5, 4, 1, 2]
+    [3, 5, 4, 2]
     [3, 5, 4, 2, 1]
+    [4]
+    [4, 1]
+    [4, 1, 2]
+    [4, 1, 2, 3]
     [4, 1, 2, 3, 5]
+    [4, 1, 2, 5]
     [4, 1, 2, 5, 3]
+    [4, 1, 3]
+    [4, 1, 3, 2]
     [4, 1, 3, 2, 5]
+    [4, 1, 3, 5]
     [4, 1, 3, 5, 2]
+    [4, 1, 5]
+    [4, 1, 5, 2]
     [4, 1, 5, 2, 3]
+    [4, 1, 5, 3]
     [4, 1, 5, 3, 2]
+    [4, 2]
+    [4, 2, 1]
+    [4, 2, 1, 3]
     [4, 2, 1, 3, 5]
+    [4, 2, 1, 5]
     [4, 2, 1, 5, 3]
+    [4, 2, 3]
+    [4, 2, 3, 1]
     [4, 2, 3, 1, 5]
+    [4, 2, 3, 5]
     [4, 2, 3, 5, 1]
+    [4, 2, 5]
+    [4, 2, 5, 1]
     [4, 2, 5, 1, 3]
+    [4, 2, 5, 3]
     [4, 2, 5, 3, 1]
+    [4, 3]
+    [4, 3, 1]
+    [4, 3, 1, 2]
     [4, 3, 1, 2, 5]
+    [4, 3, 1, 5]
     [4, 3, 1, 5, 2]
+    [4, 3, 2]
+    [4, 3, 2, 1]
     [4, 3, 2, 1, 5]
+    [4, 3, 2, 5]
     [4, 3, 2, 5, 1]
+    [4, 3, 5]
+    [4, 3, 5, 1]
     [4, 3, 5, 1, 2]
+    [4, 3, 5, 2]
     [4, 3, 5, 2, 1]
+    [4, 5]
+    [4, 5, 1]
+    [4, 5, 1, 2]
     [4, 5, 1, 2, 3]
+    [4, 5, 1, 3]
     [4, 5, 1, 3, 2]
+    [4, 5, 2]
+    [4, 5, 2, 1]
     [4, 5, 2, 1, 3]
+    [4, 5, 2, 3]
     [4, 5, 2, 3, 1]
+    [4, 5, 3]
+    [4, 5, 3, 1]
     [4, 5, 3, 1, 2]
+    [4, 5, 3, 2]
     [4, 5, 3, 2, 1]
+    [5]
+    [5, 1]
+    [5, 1, 2]
+    [5, 1, 2, 3]
     [5, 1, 2, 3, 4]
+    [5, 1, 2, 4]
     [5, 1, 2, 4, 3]
+    [5, 1, 3]
+    [5, 1, 3, 2]
     [5, 1, 3, 2, 4]
+    [5, 1, 3, 4]
     [5, 1, 3, 4, 2]
+    [5, 1, 4]
+    [5, 1, 4, 2]
     [5, 1, 4, 2, 3]
+    [5, 1, 4, 3]
     [5, 1, 4, 3, 2]
+    [5, 2]
+    [5, 2, 1]
+    [5, 2, 1, 3]
     [5, 2, 1, 3, 4]
+    [5, 2, 1, 4]
     [5, 2, 1, 4, 3]
+    [5, 2, 3]
+    [5, 2, 3, 1]
     [5, 2, 3, 1, 4]
+    [5, 2, 3, 4]
     [5, 2, 3, 4, 1]
+    [5, 2, 4]
+    [5, 2, 4, 1]
     [5, 2, 4, 1, 3]
+    [5, 2, 4, 3]
     [5, 2, 4, 3, 1]
+    [5, 3]
+    [5, 3, 1]
+    [5, 3, 1, 2]
     [5, 3, 1, 2, 4]
+    [5, 3, 1, 4]
     [5, 3, 1, 4, 2]
+    [5, 3, 2]
+    [5, 3, 2, 1]
     [5, 3, 2, 1, 4]
+    [5, 3, 2, 4]
     [5, 3, 2, 4, 1]
+    [5, 3, 4]
+    [5, 3, 4, 1]
     [5, 3, 4, 1, 2]
+    [5, 3, 4, 2]
     [5, 3, 4, 2, 1]
+    [5, 4]
+    [5, 4, 1]
+    [5, 4, 1, 2]
     [5, 4, 1, 2, 3]
+    [5, 4, 1, 3]
     [5, 4, 1, 3, 2]
+    [5, 4, 2]
+    [5, 4, 2, 1]
     [5, 4, 2, 1, 3]
+    [5, 4, 2, 3]
     [5, 4, 2, 3, 1]
+    [5, 4, 3]
+    [5, 4, 3, 1]
     [5, 4, 3, 1, 2]
+    [5, 4, 3, 2]
     [5, 4, 3, 2, 1]
-    120
-    Callable: _get_permutation_helper
+    325
+    Callable: _get_list_dfs_traversal_helper
     Callable Call Count: 206
-
-    Process finished with exit code 0
-
     """
 
 

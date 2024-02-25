@@ -12,6 +12,9 @@ Details:
 Description:
 
 Notes:
+    * CHECKS TO SEE IF A B VALUE IS ALREADY USED TO COMPARE DIAGONALS
+
+    For a diagonal checker, don't check for slope to be the same because that requires a loop.
 
 Time Complexity:
     If n == length of row and m == length of column
@@ -188,7 +191,7 @@ def dfs_n_queens_hash(board: List[List[int]],
                 """
                 list_solutions_unique[queens_on_board].add(tuple((tuple(row.copy()) for row in board)))
 
-            # Check if placing a queen a given x, y will not put the queen in check
+            # Check if placing a queen a given x, y will not threaten queen
             if validator(x, y, set_index_column_used, set_index_row_used, set_b_initial_bot_top, set_b_initial_top_bot):
                 """
                 Using two y = mx + b equations to represent the diagonals where a queen can attack from, if we 

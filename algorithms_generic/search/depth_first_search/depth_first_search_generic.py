@@ -26,8 +26,8 @@ Reference:
 from typing import List
 
 
-# from joseph_resources.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
-# from joseph_resources.decorators.timer import timer
+# from joseph_library.decorators._old.callable_called_count import print_callable_called_count, callable_called_count
+# from joseph_library.decorators.timer import timer
 
 
 # @timer

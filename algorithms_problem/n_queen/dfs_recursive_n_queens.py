@@ -14,6 +14,8 @@ Description:
 Notes:
     I do not recommend making a bigger grid, it will take a long time...
 
+    For a diagonal checker, don't check for slope to be the same because that requires a loop.
+
 Time Complexity:
     If n == length of row and m == length of column
 
@@ -125,7 +127,7 @@ def are_diagonals_safe(board: List[List[int]], y_initial: int, x_initial: int, s
     Functions to calculate row based on b value and column (x_0), also does not follow PEP 8 with lambdas
     
     Negative values that result from the below functions will wrap around the row.
-    Positive values that result from teh below functions that are greater than the size of the row will
+    Positive values that result from the below functions that are greater than the size of the row will
     crash. Conditions must be in place to prevent this.
     """
     func_get_row_bot_top = lambda x_0: (-1 * x_0) + b_initial_bot_top
