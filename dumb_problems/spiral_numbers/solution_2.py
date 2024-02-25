@@ -11,7 +11,15 @@ Details:
 Description:
 
 Notes:
-    BFS to add numbers to a grid in clockwise spiral cycle manner.
+    BFS to add numbers to a grid in a clockwise spiral cycle manner.
+    The way in which items are added to the queue in the BFS is based on
+    the difference between the initial cell's position (where the spiral starts)
+    to the current cell's position, we'll call this the difference position.
+    The signs of the difference position's components (negative, 0, positive),
+    determines where iteration starts in the clockwise cycle.
+    Iteration over the clockwise cycle adds the surrounding elements to the BFS queue.
+    The clockwise cycle is hard coded to start from the top right.
+
     Adding to the grid DOES take in account invalid grid positions
     as valid positions to place numbers.
 
