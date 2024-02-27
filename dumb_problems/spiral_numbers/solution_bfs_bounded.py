@@ -30,46 +30,18 @@ Explanation:
 Reference:
 
 """
-import sys
 from queue import Queue
 from typing import Callable
 from typing import Generator
 from typing import List
 from typing import Set
 from typing import Tuple
-from typing import TypeAlias
-from typing import Union
 
-import numpy as np
-
-np.set_printoptions(threshold=sys.maxsize)
-np.set_printoptions(linewidth=sys.maxsize)
-
-Grid: TypeAlias = List[List[Union[None, int]]]  # Not Mathematically a matrix
-Position: TypeAlias = Tuple[int, int]
-
-# This cycle is clockwise starting from the top right (Up Right)
-LIST_CYCLE_POSITION_SHIFT: List[Position] = [
-    (1, -1),  # Up Right
-    (1, 0),  # Right
-    (1, 1),  # Down Right
-    (0, 1),  # Down
-    (-1, 1),  # Down Left
-    (-1, 0),  # Left
-    (-1, -1),  # Up Left
-    (0, -1),  # Up
-]
-
-
-def get_position_distance(position_start: Position, position_target: Position) -> Position:
-    return (
-        position_target[0] - position_start[0],
-        position_target[1] - position_start[1]
-    )
-
-
-def get_grid(x: int, y: int) -> Grid:
-    return [[0 for _ in range(x)] for _ in range(y)]
+from common import Grid
+from common import LIST_CYCLE_POSITION_SHIFT
+from common import Position
+from common import get_grid
+from common import print_grid
 
 
 def generator_add_cycle_position_shift(position: Position,
@@ -108,8 +80,11 @@ def get_generator_add_cycle_position_shift_relative_to_position_relative(
     """
     Get a custom generator_add_cycle_position_shift that is based on order of elements in list_cycle_position_shift.
 
+    This is needed because
+
     Notes:
-        The lexical body of this function and the function returned together is called a closure.
+        Both the lexical body of this function (the variables in this function) and the inner function (the defined
+        function in this function) make up a closure when the inner function is returned.
 
     :param list_cycle_position_shift:
     :return:
@@ -123,7 +98,10 @@ def get_generator_add_cycle_position_shift_relative_to_position_relative(
     def _generator_add_cycle_position_shift_relative_to_position_relative(
             position: Position,
             position_relative: Position) -> Generator[Position, None, None]:
-        position_distance = get_position_distance(position, position_relative)
+        position_distance = (
+            position[0] - position_relative[0],
+            position[1] - position_relative[1]
+        )
 
         # Branchless sign trick to convert position_distance to position_shift where valid values are (-1, 0, 1)
         sign_x = (position_distance[1] > 0) - (position_distance[1] < 0)
@@ -142,10 +120,10 @@ def get_generator_add_cycle_position_shift_relative_to_position_relative(
     return _generator_add_cycle_position_shift_relative_to_position_relative
 
 
-def bfs_spiral_add_number_to_grid(grid: Grid,
-                                  position_start: Position,
-                                  _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
-                                  ) -> None:
+def bfs_spiral_add_numbers_to_grid_bounded(grid: Grid,
+                                           position_start: Position,
+                                           _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
+                                           ) -> None:
     """
     BFS expand to add the surrounding items to a queue in specific way.
     The order in which items are added to the queue are based on a given position to position_start.
@@ -221,13 +199,9 @@ def main() -> None:
 
     position_start: Tuple[int, int] = (5, 5)
 
-    bfs_spiral_add_number_to_grid(grid, position_start)
+    bfs_spiral_add_numbers_to_grid_bounded(grid, position_start)
 
     print_grid(grid)
-
-
-def print_grid(grid: Grid) -> None:
-    print(np.array(grid))
 
 
 if __name__ == '__main__':

@@ -34,19 +34,30 @@ from queue import Queue
 from typing import Set
 from typing import Tuple
 
-from solution_1 import Grid
-from solution_1 import LIST_CYCLE_POSITION_SHIFT
-from solution_1 import Position
-from solution_1 import get_generator_add_cycle_position_shift_relative_to_position_relative
-from solution_1 import get_grid
-from solution_1 import print_grid
+from common import Grid
+from common import LIST_CYCLE_POSITION_SHIFT
+from common import Position
+from common import get_grid
+from common import print_grid
+
+from solution_bfs_bounded import get_generator_add_cycle_position_shift_relative_to_position_relative
 
 
-def bfs_spiral_add_number_to_grid_inpendent_of_grid(grid: Grid,
-                                                    number_of_valid_positions_on_grid: int,
-                                                    position_start: Position,
-                                                    _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
-                                                    ):
+def bfs_spiral_add_numbers_to_grid_unbounded(grid: Grid,
+                                             number_of_valid_positions_on_grid: int,
+                                             position_start: Position,
+                                             _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
+                                             ):
+    """
+    This BFS takes in account cells that are not included in the grid and will assign the correct values
+    to the existing grid cells based on both existing and non existing cells in the grid.
+
+    :param grid:
+    :param number_of_valid_positions_on_grid:
+    :param position_start:
+    :param _list_cycle_position_shift:
+    :return:
+    """
     try:
         grid[position_start[1]][position_start[0]]
     except Exception as e:
@@ -113,7 +124,7 @@ def main() -> None:
 
     position_start: Tuple[int, int] = (5, 5)
 
-    bfs_spiral_add_number_to_grid_inpendent_of_grid(grid, number_of_valid_positions_on_grid, position_start)
+    bfs_spiral_add_numbers_to_grid_unbounded(grid, number_of_valid_positions_on_grid, position_start)
 
     print_grid(grid)
 
