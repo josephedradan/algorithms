@@ -19,6 +19,8 @@ Explanation:
 Reference:
 
 """
+from __future__ import annotations
+
 import sys
 from typing import List
 from typing import Tuple
@@ -27,11 +29,19 @@ from typing import Union
 
 import numpy as np
 
+
+from utility import GridRecordable
+
 np.set_printoptions(threshold=sys.maxsize)
 np.set_printoptions(linewidth=sys.maxsize)
 
 Grid: TypeAlias = List[List[Union[None, int]]]  # Not Mathematically a matrix
 Position: TypeAlias = Tuple[int, int]
+
+GridLike: TypeAlias = Union[Grid, np.ndarray, GridRecordable]
+
+Shape: TypeAlias = Tuple[int, ...]
+
 
 # This cycle is clockwise starting from the top right (Up Right)
 LIST_CYCLE_POSITION_SHIFT: List[Position] = [

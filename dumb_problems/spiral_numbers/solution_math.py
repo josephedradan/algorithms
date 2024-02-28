@@ -32,7 +32,7 @@ from common import get_grid
 from common import print_grid
 
 """
-An algorithm to add numbers to the spiral mathematically
+An algorithm to add numbers to the spiral mostly mathematically
 
 Notes:
 
@@ -223,41 +223,44 @@ Notes:
     the bounding row or column and the LEFT SIDE of the inequality as the number that slides along perpendicular
     to that row or column.
         Explanation:
-            Given
-                abs(y) < abs(x)
-                (4, 2)  # Position given, Ring 4
+            Part 1
+                Given
+                    abs(y) < abs(x)
+                    (4, 2)  # Position given, Ring 4
 
-            1. x is the bound, so go to the correct x column and ignore the y component by setting y = 0.
-            You get (x, 0) where x is whatever the x value is from a given (x, y) position.
-            So
-                x = 4 and 4 is the bound.
-                Think of it as (4, 0)
+                1. x is the bound or the bounding component, so go to the correct x column and ignore the 
+                y component by setting y = 0. You get (x, 0) where x is the x value from a 
+                Given position.
+                So
+                    x = 4 and 4 is the bound.
+                    Think of it as (4, 0)
+    
+                2. If you don't change the x value (Make it constant), and you vary the y component where
+                abs(y) < abs(x) then you know which side of the ring you are on.
+                So
+                    (4, y) where abs(y) < abs(x)
+                    You vary y, so you are sliding along x = 4 which is vertical which means that you are on
+                    the right or left side of the ring.
+                    Since x = 4 is positive, then you automatically know that you are on the right side of Ring 4
+                    because x = 4 is greater than x = 0 and x = 0 is the Center position.
+    
+                3. If you recall that we move in a ring from Down -> Left -> Up -> Right from (2b)
+                then you know what direction you are going which is based on the side you are on.
+                So
+                    We are on the Right side of Ring 4 (Which is on the right side of the spiral) because of x = 4.
+                    So we are going Down.
 
-            2. If you don't change the x value (Make it constant), and you vary the y component where
-            abs(y) < abs(x) then you know which side of the ring you are on.
-            So
-                (4, y) where abs(y) < abs(x)
-                You vary y, so you are sliding along x = 4 which is vertical which means that you are on
-                the right or left side of the ring.
-                Since x = 4 is positive, then you automatically know that you are on the right side of Ring 4
-                because x = 4 is greater than x = 0 and x = 0 is the Center position.
+            Part 2
+                Given
+                    abs(y) == abs(x)
+                    (5, -5)  # Position given, Ring 5
 
-            3. If you recall that we move in a ring from Down -> Left -> Up -> Right from (2b)
-            then you know what direction you are going which is based on the side you are on.
-            So
-                We are on the Right side of Ring 4 (Which is on the right side of the spiral) because of x = 4.
-                So we are going Down.
-
-            Given
-                abs(y) == abs(x)
-                (5, -5)  # Position given, Ring 5
-
-            1. We are at a corner, recall that ring movement is Down -> Left -> Up -> Right from (2b), recall
-            what quadrant we are in based on the signs of the component (+, -) from (5a) and (5b).
-            So
-                (5, -5) is (+, -) which is Quadrant 4 (Top Right) on Ring 5
-                We must go logically Right because the numbers logically follow and we will go into the next
-                ring.
+                1. We are at a corner, recall that ring movement is Down -> Left -> Up -> Right from (2b), recall
+                what quadrant we are in based on the signs of the component (+, -) from (5a) and (5b).
+                So
+                    (5, -5) is (+, -) which is Quadrant 4 (Top Right) on Ring 5
+                    We must go logically Right because the numbers logically follow and we will go into the next
+                    ring.
 
     (5c) Based on (5b) we can make a more useful pattern for determining what side we are on any ring.
     Looking at the pattern stated in (5b) we can see any direction is stated in 2 quadrants.
@@ -287,16 +290,21 @@ Notes:
                         Must go Down to logically follow numbers
                         return
                         
-        * Note that "<=" is used for both conditionals to take in account the corners which is why you cannot use 
-        "else if" on the second outer if statement because sides share the same corners.         
+        * Note that "<=" is used for both outer if conditionals to take in account the corners which is why you 
+        cannot use "else if" on the second outer if statement because sides of a ring share the same corners.
+        
+        * Note that a return happens in the body of an inner if conditional because we don't want other 
+        conditional body's logic messing with the logic in the body that had the return in it.
         
         Example:
-            (-5, 4)
-                abs(y) <= abs(x)
-                    x is Negative
-                        Left side
-                            Must go Up to logically follow numbers
-                            return
+            Given
+                (-5, 4)
+                
+            abs(y) <= abs(x)
+                x is Negative
+                    Left side
+                        Must go Up to logically follow numbers
+                        return 
                             
     (6a) We need an equation to give us the total sum of the previous rings which we will call the total count size.
     The Current ring we are on is based on a Given position's highest absolute value component,
@@ -304,11 +312,9 @@ Notes:
     Also refer to (0b) to know that a Given position is relative to the Center position.
     Recall the equations from (3a), (3b), and (3c), we can use one of those equations to find the sum of all 
     the ring sizes before the current ring.
-    We will use the below equation from (3b) because it is the most versatile equation:
+    We will use the below equation from (3a) because we care about the size of an entire ring:
 
-        length_of_ring = get_length_of_ring_by_side_accumulative(index_ring, index_side) = (
-            (index_side * (index_ring * 2)) if index_ring > 0 else 1
-        )
+        size_of_ring = get_size_of_ring_index(index_ring) = (4 * (index_ring * 2)) if index_ring > 0 else 1
 
     Now we need a Summation of the above equation to give us the total count from the previous rings except for the
     current ring. We don't want the summation to run on the Current ring because that value is based on the
@@ -398,7 +404,7 @@ Notes:
                     Must go Down to logically follow numbers
                     return
                     
-    Recall the versatile equation for finding the length of a ring from (3b).
+    Recall the versatile equation for finding the length of a ring based on an index of a side from (3b).
 
         length_of_ring = get_length_of_ring_by_side_accumulative(index_ring, index_side) = (
             (index_side * (index_ring * 2)) if index_ring > 0 else 1
@@ -460,24 +466,24 @@ Notes:
             7. End of a ring is always at a the top right diagonal so going right on a diagonal will start on the
             new ring.
             8a. The end of a ring has the signs (+, -)
-            8b. The end of a ring has the position format (i, -1 * i)
+            8b. The end of a ring has the position format (i, -1 * i) where i is the index_ring of the current ring
             9a. The start of a ring has the signs (+, -)
             9b. The start of a new ring has the position format (i, -1 * (i-1)) where i is the
-            current index_ring and index_ring > 0
+            index_ring of the new ring and index_ring > 0
 
-            10. The Changing x or y components have the same absolute numbers but just different
+            * 10. The Changing x or y components of all of the directions have the same absolute values but different
             signs because of direction movement and starting position.
             11. The Changing x or y components between Ring 1 and Ring 2 show that Ring 2 expands
             outward in both the negative and positive directions which also encompasses the
-            Changing x or y components of Ring 1
+            Changing x or y components of Ring 1 found in the middle of the list of Changing components.
             12. The Changing x or y components going Down or Right go in the positive direction, while
             The Changing x or y components going Up or Left go in the negative direction.
 
-    There are 2 relationships that are useful from the above,
+    There are 2 relationships that are derived from the notes above.
         Relationship 1
             Using the algorithm to determine what side you are on based on a Given position from (5c)
-            and using and renaming variables from the equation from (3b), we can make an algorithm to count
-            the length of the previous sides before the side of the Given position.
+            and using the equation from (3b) but changing some of it's variable names, 
+            we can make an algorithm to count the length of the previous sides before the side of the Given position.
             Because the algorithm from (5c) uses returns to escape the conditionals, if you want to continue
             without exiting immediately, you need to replace the returns with exit conditionals, in this case
             we use "_done" to signify that the conditional checking is done.
@@ -521,8 +527,7 @@ Notes:
                 ) = (number_of_sides_before_side_current * (index_ring * 2)) if index_ring > 0 else 1
             
         Relationship 2
-            Recall the pattern for finding what side of a ring you are on based on a Given position from (5c).
-            Recall Ring Corners have the same absolute value components and recall Ring Corner signs from (4c)
+            Recall Ring Corners have the same absolute value components and recall Ring Corner signs from (4c).
 
                 (+, -)  # Top Right Corner
                 (+, +)  # Bottom Right Corner
@@ -533,15 +538,15 @@ Notes:
                 1. A Given position's component that does not decide what side a Given position
                 is on (the component that does not have the greater absolute value), we'll call this the varying
                 component. 
-                2. The Ring Corner's corresponding component, the same componenet position as the varying component,
-                that is on the opposite end of the Given position's side's direction.
+                2. The Ring Corner's corresponding component, the same component position as the 
+                varying component position, that is on the opposite end of the Given position's side's direction.
             gives us the distance between a Given position and the Ring Corner that is on the opposite end
             of the Given position's side's direction. Basically, it's the distance from the Ring Corner
-            that has numbers that logically follow up to the Given position. Note that this distance is relative
-            to the side where numbers logically follow in the positive direction. 
+            that has numbers that logically follow up to the Given position. 
+            Note that this distance is relative to the side where numbers logically follow in the positive direction. 
             For example, if a Given position was at the top left corner of a ring, the side would be the 
             Top side because numbers logically follow going in the Right direction.  
-            
+                        
             To make the algorithm slightly better, we'll incorporate the above logic into the algorithm from
             Relationship 1
 
@@ -597,9 +602,23 @@ Notes:
                 ) = (number_of_sides_before_side_current * (index_ring * 2)) if index_ring > 0 else 1
 
                 difference_abs__component_varying_position_given__component_corresponding_position_corner = (
-                    component_varying_position_given - component_corresponding_position_corner
+                    abs(component_varying_position_given - component_corresponding_position_corner)
                 )
-    
+        
+            Notice that values assigned to component_corresponding_position_corner in the bodies of the conditionals 
+            correctly correspond to the correct Ring Corner based on the signs from (4c). The comment next to each
+            component_corresponding_position_corner in the body of a conditional assist with that clarification.
+            
+            * The reason why each component_corresponding_position_corner uses the absolute value of
+            the right side of the inequality of the outer if statement is because if you recall from (4c)
+            that Corners have their absolute value of components equal each other and if you recall 
+            from the explanation from (5b) about how to interpret the inequalities is that the left side of
+            the inequality changes because the highest absolute value component is the bound which represents 
+            the ring index. So if we want to know the difference between a Corner position and a Given position 
+            and we know that a Corner position has the absolute value of its components equal to each other, 
+            then we can use the non varying component AKA bounding component or the index_ring as a constant
+            to find the distance from.
+        
     (8) In order to make the complete algorithm, we need to merge the algorithm from Relationship 2 in (7)
     with the equation from (6b).
     Notes:
@@ -731,12 +750,12 @@ def put_spiral_number_on_grid(grid: Grid,
 
         if position_given[1] < 0:  # Top side
             number_of_sides_before_side_current = 3
-            component_corresponding_position_corner = -y_abs_position_given
+            component_corresponding_position_corner = -y_abs_position_given  # Top Left Corner's y
             _done = True
 
         elif position_given[1] > 0:  # Bottom side
             number_of_sides_before_side_current = 1
-            component_corresponding_position_corner = y_abs_position_given
+            component_corresponding_position_corner = y_abs_position_given  # Bottom Right Corner's y
             _done = True
 
     if y_abs_position_given <= x_abs_position_given and not _done:
@@ -744,12 +763,12 @@ def put_spiral_number_on_grid(grid: Grid,
 
         if position_given[0] < 0:  # Left side
             number_of_sides_before_side_current = 2
-            component_corresponding_position_corner = x_abs_position_given
+            component_corresponding_position_corner = x_abs_position_given  # Bottom Left Corner's x
             _done = True
 
         elif position_given[0] > 0:  # Right side
             number_of_sides_before_side_current = 0
-            component_corresponding_position_corner = -x_abs_position_given
+            component_corresponding_position_corner = -x_abs_position_given  # Top Right Corner's x
             _done = True
 
     length_before_side_current = get_length_of_ring_by_side_accumulative(
@@ -757,8 +776,8 @@ def put_spiral_number_on_grid(grid: Grid,
         number_of_sides_before_side_current
     )
 
-    difference_abs__component_varying_position_given__component_corresponding_position_corner = abs(
-        component_varying_position_given - component_corresponding_position_corner
+    difference_abs__component_varying_position_given__component_corresponding_position_corner = (
+        abs(component_varying_position_given - component_corresponding_position_corner)
     )
 
     """

@@ -39,14 +39,13 @@ from common import LIST_CYCLE_POSITION_SHIFT
 from common import Position
 from common import get_grid
 from common import print_grid
-
 from solution_bfs_bounded import get_generator_add_cycle_position_shift_relative_to_position_relative
 
 
 def bfs_spiral_add_numbers_to_grid_unbounded(grid: Grid,
                                              number_of_valid_positions_on_grid: int,
                                              position_start: Position,
-                                             _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT  # NOQA
+                                             _list_cycle_position_shift=LIST_CYCLE_POSITION_SHIFT,  # NOQA
                                              ):
     """
     This BFS takes in account cells that are not included in the grid and will assign the correct values
@@ -131,3 +130,5 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
+
