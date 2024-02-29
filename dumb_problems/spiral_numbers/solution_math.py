@@ -630,7 +630,7 @@ Notes:
             gives us the total sum of size of the rings up to index_ring. By inputting (index_ring - 1) as
             index_ring and making index_ring > 0 will give us the total sum of the size of the rings up to
             but not including the index_ring, we'll call this result sum_of_ring_sizes_before_index_ring
-          
+
         2. The algorithm from Relationship 2 in (7) gives us            
             a. length_before_side_current
                 This is the length of the Ring based on the index_ring in terms of the the sides that have
