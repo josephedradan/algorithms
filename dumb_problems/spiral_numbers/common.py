@@ -22,7 +22,9 @@ Reference:
 from __future__ import annotations
 
 import sys
+from typing import Iterable
 from typing import List
+from typing import Sequence
 from typing import Tuple
 from typing import TypeAlias
 from typing import Union
@@ -36,11 +38,11 @@ np.set_printoptions(threshold=sys.maxsize)
 np.set_printoptions(linewidth=sys.maxsize)
 
 Grid: TypeAlias = List[List[Union[None, int]]]  # Not Mathematically a matrix
-Position: TypeAlias = Tuple[int, int]
+Position: TypeAlias = Union[Tuple[int, ...], List[int]]  # Formally Tuple[int, int]
 
 GridLike: TypeAlias = Union[Grid, np.ndarray, GridRecordable]
 
-Shape: TypeAlias = Tuple[int, ...]
+Shape: TypeAlias = Union[Tuple[int, ...], List[int]]  # Formally Tuple[int, ...]
 
 
 # This cycle is clockwise starting from the top right (Up Right)

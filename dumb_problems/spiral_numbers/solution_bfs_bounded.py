@@ -195,7 +195,9 @@ def bfs_spiral_add_numbers_to_grid_bounded(grid: Grid,
 
 
 def main() -> None:
-    grid = get_grid(15, 15)
+    x = 10
+    y = 20
+    grid = get_grid(x, y)
 
     position_start: Tuple[int, int] = (5, 5)
 
