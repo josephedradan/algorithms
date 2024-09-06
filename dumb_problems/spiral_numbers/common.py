@@ -45,7 +45,17 @@ GridLike: TypeAlias = Union[Grid, np.ndarray, GridRecordable]
 Shape: TypeAlias = Union[Tuple[int, ...], List[int]]  # Formally Tuple[int, ...]
 
 
-# This cycle is clockwise starting from the top right (Up Right)
+"""
+
+Notes:
+    Recall that the grid starts at the top left corner and not the bottom left corner
+    like in math.
+    So, going Up on the grid is actually going Down on the grid when displayed.
+     
+    This cycle is clockwise starting from the top right (Up Right).
+    
+
+"""
 LIST_CYCLE_POSITION_SHIFT: List[Position] = [
     (1, -1),  # Up Right
     (1, 0),  # Right

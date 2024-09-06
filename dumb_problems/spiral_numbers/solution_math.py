@@ -43,7 +43,7 @@ Notes:
     (0b) Let the center of the spiral be the origin or the Center position and
     any Given position will be relative to that Center position.
 
-    (1) If you think about a spiral, you see that most of the of numbers logical follow along a
+    (1) If you think about a spiral, you see that most of the of numbers logically follow along a
     direction of a circle / ring. You can see that the numbers on the circle / ring have a difference of 1.
         Example
             Ring 0 -> 1  # Size 1
