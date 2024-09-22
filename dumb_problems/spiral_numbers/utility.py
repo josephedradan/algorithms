@@ -44,7 +44,7 @@ class GridRecordable(list):
     shape: Shape
     bool_should_record: bool
     _grid_recordable_parent: Union[GridRecordable, None]
-    list_matrix_copy: List[np.ndarray]
+    list_tensor_copy: List[np.ndarray]
 
     def __init__(self,
                  shape: Shape,
@@ -59,36 +59,50 @@ class GridRecordable(list):
         self.bool_should_record = bool_should_record
         self._grid_recordable_parent = _grid_recordable_parent
 
-        self.list_matrix_copy = []
+        self.list_tensor_copy = []
 
         if _grid_recordable_parent is None:
             self._grid_recordable_parent = self
 
+        # Loop over the shape to make the tensor (e.g. GridRecordable of GridRecordable of GridRecordable ...)
         if len(shape) > 1:
             for index_row in range(self.shape[0]):
                 self.append(
                     GridRecordable(
-                        tuple(shape[1:]),
+                        tuple(shape[1:]),  # The next shape is the parent's shape but it excludes the parent
                         value_in_cell,
                         False,
                         _grid_recordable_parent=self
                     )
                 )
+
+        # If the shape of the tenor is Rank 1 (Rank 1 is a vector),
+        # then fill out the values for that Rank 1 tensor and set self.bool_should_record flag to true.
         else:
             super().__init__((value_in_cell for index in range(shape[0])))
             self.bool_should_record = True
 
     def __setitem__(self, key, value):
         super().__setitem__(key, value)
+
+        # If self.bool_should_record flag is true, then any changes to self will recorded by
+        # self._grid_recordable_parent
         if self.bool_should_record:
-            self._grid_recordable_parent._record_self_to_list_matrix_recorded()
+            self._grid_recordable_parent._record_self_to_list_tensor_recorded()
 
-    def _record_self_to_list_matrix_recorded(self):
+    def _record_self_to_list_tensor_recorded(self):
+        """
+        Record or Copy self and put it in self,list_tensor_copy
+
+        Note that this function should technically only be called by self._grid_recordable_parent
+        and not self directly.
+        :return:
+        """
         matrix = np.array(self)
-        self.list_matrix_copy.append(matrix)
+        self.list_tensor_copy.append(matrix)
 
-    def get_list_matrix_recorded(self) -> List[np.ndarray]:
-        return self.list_matrix_copy
+    def get_list_tensor_recorded(self) -> List[np.ndarray]:
+        return self.list_tensor_copy
 
 
 """
