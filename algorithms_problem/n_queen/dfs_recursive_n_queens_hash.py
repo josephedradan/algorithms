@@ -72,7 +72,7 @@ def validator(x: int, y: int,
             top means absolute top (relative to you viewing the grid)
             bot means absolute bottom (relative to you viewing the grid)
 
-            Basically, everytime you think of the grid, think of it inverted over the x axis
+            Basically, every time you think of the grid, think of it inverted over the x axis
 
         Use equation:
             y = mx + b
